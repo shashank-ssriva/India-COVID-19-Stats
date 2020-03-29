@@ -1,0 +1,18 @@
+pipeline {
+   agent any
+
+   stages {
+      stage('Deploy to Heroku') {
+         steps {
+            sh label: '', script: 'sh .deploy_scripts/deploy_heroku.sh'
+         }
+      stage('SCM') {
+         git 'https://github.com/shashank-ssriva/India-COVID-19-Stats.git'
+  }
+      stage('SonarQube analysis') {
+         def scannerHome = tool 'Sonar on Mac';
+         sh "${scannerHome}/bin/sonar-scanner"
+    }
+  }
+      }
+   }
