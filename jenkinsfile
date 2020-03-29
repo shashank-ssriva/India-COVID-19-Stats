@@ -9,7 +9,6 @@ pipeline {
         }
         stage('SonarQube analysis') {
             steps {
-                def scannerHome = tool 'Sonar on Mac';
                 sh "${scannerHome}/bin/sonar-scanner"
             }
         }
