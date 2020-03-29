@@ -5,7 +5,7 @@ addons:
   sonarcloud:
     organization: "shashank-ssriva-github"
     token:
-      secure: "$SONAR_TOKEN"
+      secure: "IS7iWWjE59t145f4dqppSLPpk3j6hQthm9aHG15VJzI8TB9Z3JJ5jZxrcFbUTNfg96NNj8ZflqN6leULAcrc3VWwhg4SpazPgkWIsipJOP6F+6caC/phPho5Iu29B01oGADzCNeYRzwetmYTBUh09tSEXDAdrGGWeHs+lM6ITFH/PvwZx5PkhxQVAfsGWNYbqEZu4BO/74+Y/WxR9MEB0href5mpHg59xRpVjZSrmE167NvobDPAeMUuMK1F+6ZTRcpPAUkNOX+gSJARDa1Lz3jR7uykXJLhjuIzqFApCSgtHcPgWuEzzD7DmBDxd6GKSs9oKGjCvLAWt70iSxq1MXovruSTtcPvwFthDhBOYF/R+WiKTwb43hk/dco+nm/c96iSjdUn/6/HDX9b3MilCeA33H5w+osWcFlaIE0wiA59BfZaa2+Jv8TeYnDsznx9s7pENzJpFsDlokEDf/AZpWybQLLk0AdyrOu7XPFefFCLlvcU5WVLMBDsVcm+wnRCvHo6mJgFJobZDoUPEZ+C9HleOzbuHMpNXCAsEQHXBJr1mX0kkPbIWjn0fzHTaYyiaNoOWRqGd4sWvmiEL0bHgkKDciNQ47Ne8XI95bK9JkZJaDbgIoBUkAlh90fM8XcaoqT+vhYvYdf7OAOu5zS/5A8xQzenfEIXmbfIGvBB17M="
 services:
   - docker
 
