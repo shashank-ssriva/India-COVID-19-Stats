@@ -9,8 +9,8 @@ pipeline {
         }
         stage('SonarQube analysis') {
             steps {
-                withSonarQubeEnv('SonarQube on cloud'){
                 def scannerHome = tool name: 'Sonar on Mac', type: 'hudson.plugins.sonar.SonarRunnerInstallation';
+                withSonarQubeEnv('SonarQube on cloud'){
                 sh "$scannerHome/sonar-scanner"
                 }
             }
