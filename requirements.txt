@@ -1,0 +1,14 @@
+pytest
+flake8
+python-dateutil
+coverage
+bs4
+click
+coverage
+Flask
+itsdangerous
+Jinja2
+MarkupSafe
+requests
+Werkzeug
+selenium
