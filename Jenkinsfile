@@ -9,7 +9,7 @@ pipeline {
         }
         stage('SonarQube analysis') {
             steps {
-                withSonarQubeEnv(credentialsId: 'sonar-cloud-login'){
+                withSonarQubeEnv('SonarQube on cloud'){
                 sh "/Users/admin/Downloads/sonar-scanner-4.0.0.1744-macosx/bin/sonar-scanner"
                 }
             }
