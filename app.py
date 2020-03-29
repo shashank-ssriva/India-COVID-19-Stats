@@ -12,8 +12,9 @@ def main():
     URL = 'https://www.mohfw.gov.in/'
     response = requests.get(URL).content
     soup = BeautifulSoup(response, 'html.parser')
+    table = soup.find('div', {'id': 'cases'})
     state_wise_stats = []
-    all_rows = soup.find_all('tr')
+    all_rows = table.find_all('tr')
     for row in all_rows:
         stat = extract_contents(row.find_all('td'))
         if stat:
@@ -41,8 +42,6 @@ def main():
     num_cases.remove(num_cases[-1])
     num_casualties.remove(num_casualties[-1])
 
-    print(num_people_cured)
-
     for j in country_states:
         if j == country_states[-1]:
             break
@@ -58,9 +57,7 @@ def main():
     state_with_max_cases = country_states[max_value_index]
 
     max_casualties = 0
-    for j in num_casualties:
-        print(j[0])
-    print("last element", country_states[-1])
+
     for j in num_casualties:
         k = j
         k = int(k)
