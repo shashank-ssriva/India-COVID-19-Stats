@@ -23,5 +23,4 @@ script:
 
 
 after_success:
-  - 
-test "$TRAVIS_BRANCH" = "master" && sh .deploy_scripts/deploy_heroku.sh
+  - test "$TRAVIS_BRANCH" = "master" && sh .deploy_scripts/deploy_heroku.sh
