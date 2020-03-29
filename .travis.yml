@@ -1,0 +1,27 @@
+dist: trusty
+sudo: required
+
+addons:
+  sonarcloud:
+    organization: "shashank-ssriva-github"
+    token:
+      secure: "KrWaELf/KGpFstNgbkl47UDCynMXBGKmeA8/37M8buH1lItlLzeB4y64pk3zrigiwrf8gcsgFzTk5gFaj9CEu/4A42U7zGh70TjjIJCBa5/mO4AyApvUlBPqY2b+gVcng34/rap9NErq1ipXPrY0Y6AbsqKC07CiVYbgmdDLyNb+DCzRFrf+HdgV4A16OMhZgqjncAEHmQQLDC7Gg+oJSk3s+NxkLEBL0pPa9p7bO+J76YZFZaGFF+bkPKyOAw+n+LILORjFzcw3HlWq3po4KGU2qyKTUa83alvh/62UAErib4S901NGptGkDB1rMDFXSBNTq5caItyPlfcpzlO9AYf/QsJcJ4ZTypuD+uraacoSwEMUlr4up1hUTqJIxLMb4EHdb8pBMk+LKg14DNd60cBEtL+A/ku5HbcFj/gAGObqA6iVDW5D1lwaTOw7Kbds6BSb79XgRkmgLVavIV7cjZyJJ9rNt6xFqxZSyKPviEgmoJ/cEgS9LYuMWW+ry56wf0RVAitTX1pclEvGhdwa7E8nHh/swJLrqDegstg/HAz4hqySfL6JY06U6TQ02ZNZvLKwHxqEkI+dr29mpiVis3fA58dEL+pay8gWoTE9HIHETHv9v7xyk3pzWcYH194SQP1wVHmvwyWdWlxy0ZlF8BvTzfzNp99fbBfinqISN3I="
+
+services:
+  - docker
+
+language: python
+
+script:
+  # simple test
+  - python3 -m pytest -v
+
+  # code coverage test  
+  - coverage report -m app.py
+
+  # sonar scanner
+  - sonar-scanner
+
+
+after_success:
+  - test "$TRAVIS_BRANCH" = "master" && sh .deploy_scripts/deploy_heroku.sh
