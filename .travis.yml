@@ -12,12 +12,6 @@ services:
 language: python
 
 script:
-  # simple test
-  - python3 -m pytest -v
-
-  # code coverage test  
-  - coverage report -m app.py
-
   # sonar scanner
   - sonar-scanner
 
