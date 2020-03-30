@@ -53,8 +53,6 @@ def main():
     max = 0
     max_value_index = 0
     for j in num_cases:
-        if j == num_cases[-1]:
-            break
         k = j
         k = int(k)
         if k > max:
