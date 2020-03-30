@@ -15,37 +15,43 @@ def main():
     table = soup.find('div', {'id': 'cases'})
     state_wise_stats = []
     all_rows = table.find_all('tr')
+    #print(all_rows)
     for row in all_rows:
         stat = extract_contents(row.find_all('td'))
         if stat:
             if len(stat) == 5:
                 # last row
-                stat = ['', *stat]
+                #stat = ['', *stat]
                 state_wise_stats.append(stat)
             elif len(stat) == 6:
                 state_wise_stats.append(stat)
 
+    print(state_wise_stats)
+    print(stat[1])
     num_cases = []
     country_states = []
     num_casualties = []
-    num_people_cured = state_wise_stats[-1][4]
-    total_casualties = state_wise_stats[-1][5]
-    total_cases1 = state_wise_stats[-1][2]
-    total_cases = total_cases1.replace("#", "")
+    num_people_cured = stat[2]
+    total_casualties = stat[3]
+    total_cases = stat[1]
+    #total_cases = total_cases1.replace("#", "")
+    print(total_cases)
     for i in state_wise_stats:
         num_cases.append(i[2])
         country_states.append(i[1])
-        num_casualties.append(i[5])
-
-    state_wise_stats.remove(state_wise_stats[-1])
-    country_states.remove(country_states[-1])
-    num_cases.remove(num_cases[-1])
-    num_casualties.remove(num_casualties[-1])
+        num_casualties.append(i[4])
+    print(country_states)
+    print("hehe", country_states[-1])
+    #state_wise_stats.remove(state_wise_stats[-1])
+    #country_states.remove(country_states[-1])
+    #num_cases.remove(num_cases[-1])
+    #num_casualties.remove(num_casualties[-1])
 
     for j in country_states:
         if j == country_states[-1]:
             break
     max = 0
+    max_value_index = 0
     for j in num_cases:
         if j == num_cases[-1]:
             break
@@ -78,4 +84,4 @@ def main():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=int(os.getenv('PORT', 5002)))
+    app.run(host='0.0.0.0', port=int(os.getenv('PORT', 5002)), debug=True)
