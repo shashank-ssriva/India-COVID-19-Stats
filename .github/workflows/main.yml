@@ -1,0 +1,17 @@
+- name: Deploy to Heroku
+  uses: AkhileshNS/heroku-deploy@v3.0.0
+  with:
+    # This will be used for authentication. You can find it in your heroku homepage account settings
+    heroku_api_key: fead2f34-d75d-46e0-9144-468da0eb5497
+    # Email that you use with heroku
+    heroku_email: cheakymickey@gamail.com
+    # The appname to use for deploying/updating
+    heroku_app_name: india-covid-stats
+    # An optional buildpack to use when creating the heroku application
+    buildpack: # optional
+    # The branch that you would like to deploy to Heroku
+    branch: # optional, default is HEAD
+    # Set this to true if you don't want to use --force when switching branches
+    dontuseforce: # optional
+    # Will deploy using Dockerfile in project root.
+    usedocker: true
