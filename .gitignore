@@ -1,0 +1,6 @@
+__pycache__
+.git
+.vscode/settings.json
+.pytest_cache/v/cache/nodeids
+.pytest_cache/v/cache/stepwise
+.scannerwork

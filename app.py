@@ -13,9 +13,15 @@ def main():
     response = requests.get(URL).content
     soup = BeautifulSoup(response, 'html.parser')
     table = soup.find('div', {'id': 'cases'})
+    date_div_element = soup.findAll('div', attrs={"class": "content newtab"})
+
+    for x in date_div_element:
+        stats_as_on_date_temp = x.find('p').text.split("Nationals, ")[1]
+        stats_as_on_date = stats_as_on_date_temp.replace(")", "")
+
     state_wise_stats = []
     all_rows = table.find_all('tr')
-    #print(all_rows)
+    # print(all_rows)
     for row in all_rows:
         stat = extract_contents(row.find_all('td'))
         if stat:
@@ -34,7 +40,7 @@ def main():
     num_people_cured = stat[2]
     total_casualties = stat[3]
     total_cases = stat[1]
-    #total_cases = total_cases1.replace("#", "")
+    # total_cases = total_cases1.replace("#", "")
     print(total_cases)
     for i in state_wise_stats:
         num_cases.append(i[2])
@@ -42,10 +48,10 @@ def main():
         num_casualties.append(i[4])
     print(country_states)
     print("hehe", country_states[-1])
-    #state_wise_stats.remove(state_wise_stats[-1])
-    #country_states.remove(country_states[-1])
-    #num_cases.remove(num_cases[-1])
-    #num_casualties.remove(num_casualties[-1])
+    # state_wise_stats.remove(state_wise_stats[-1])
+    # country_states.remove(country_states[-1])
+    # num_cases.remove(num_cases[-1])
+    # num_casualties.remove(num_casualties[-1])
 
     for j in country_states:
         if j == country_states[-1]:
@@ -78,7 +84,8 @@ def main():
                            total_cases=total_cases,
                            max=max, state_with_max_cases=state_with_max_cases,
                            max_casualties=max_casualties,
-                           state_with_max_casualties=state_with_max_casualties)
+                           state_with_max_casualties=state_with_max_casualties,
+                           stats_as_on_date=stats_as_on_date)
 
 
 if __name__ == "__main__":
