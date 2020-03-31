@@ -2,5 +2,7 @@ __pycache__
 .git
 .vscode/settings.json
 .scannerwork
-.pytest_cache
-htmlcov
+.pytest_cache/
+htmlcov/
+tests/
+.coverage

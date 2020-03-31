@@ -1,4 +1,6 @@
+![Deploy](https://github.com/shashank-ssriva/India-COVID-19-Stats/workflows/Deploy/badge.svg)
 # India COVID 19 Stats
+
 
 A Flask web-app that pulls the latest data from the Ministry of Health & Family Welfare website & displays in the form of easy to understand, colorful & interactive charts.
 
