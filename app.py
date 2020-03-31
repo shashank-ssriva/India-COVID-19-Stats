@@ -46,7 +46,7 @@ def main():
         print(i)
         num_cases.append(i[2])
         country_states.append(i[1])
-        num_casualties.append(i[3])
+        num_casualties.append(i[4])
 
     #print(country_states)
     #print("hehe", country_states)
