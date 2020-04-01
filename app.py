@@ -22,27 +22,27 @@ def main():
         
     state_wise_stats = []
     all_rows = table.select('tbody tr')
-    print(all_rows)
+    #print(all_rows)
     for row in all_rows:
         stat = extract_contents(row.find_all('td'))
         #print("STAT", stat)
         state_wise_stats.append(stat)
 
     print(state_wise_stats)
-    print(state_wise_stats[-2][1])
+    print(state_wise_stats[-1])
     num_cases = []
     country_states = []
     num_casualties = []
     num_cured = []
-    num_people_cured = state_wise_stats[-2][2]
-    total_casualties = state_wise_stats[-2][3]
-    total_cases_temp = state_wise_stats[-2][1]
+    num_people_cured = state_wise_stats[-1][2]
+    total_casualties = state_wise_stats[-1][3]
+    total_cases_temp = state_wise_stats[-1][1]
     total_cases = total_cases_temp.replace("#", "")
 
-    state_wise_stats.remove(state_wise_stats[0])
+    #state_wise_stats.remove(state_wise_stats[0])
     print("new list", state_wise_stats)
 
-    num_elements_to_remove = 2
+    num_elements_to_remove = 1
     new_state_wise_stats_list = state_wise_stats[: -num_elements_to_remove or None]
     for i in new_state_wise_stats_list:
         print(i)
