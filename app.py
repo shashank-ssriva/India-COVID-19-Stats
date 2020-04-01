@@ -12,16 +12,17 @@ def main():
     URL = 'https://www.mohfw.gov.in/'
     response = requests.get(URL).content
     soup = BeautifulSoup(response, 'html.parser')
-    table = soup.find('div', {'id': 'cases'})
-    date_div_element = soup.findAll('div', attrs={"class": "content newtab"})
+    table = soup.find('div', {'class': 'data-table table-responsive'})
+    date_div_element = soup.findAll('div', attrs={"class": "status-update"})
+    print(date_div_element)
 
     for x in date_div_element:
-        stats_as_on_date_temp = x.find('p').text.split("Nationals, ")[1]
-        stats_as_on_date = stats_as_on_date_temp.replace(")", "")
-
+        stats_as_on_date = x.find('h2').text.strip("COVID-19 INDIA")
+    print(stats_as_on_date)
+        
     state_wise_stats = []
-    all_rows = table.find_all('tr')
-    #print(all_rows)
+    all_rows = table.select('tbody tr')
+    print(all_rows)
     for row in all_rows:
         stat = extract_contents(row.find_all('td'))
         #print("STAT", stat)
