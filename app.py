@@ -33,6 +33,7 @@ def main():
     num_cases = []
     country_states = []
     num_casualties = []
+    num_cured = []
     num_people_cured = state_wise_stats[-2][2]
     total_casualties = state_wise_stats[-2][3]
     total_cases_temp = state_wise_stats[-2][1]
@@ -48,6 +49,7 @@ def main():
         num_cases.append(i[2])
         country_states.append(i[1])
         num_casualties.append(i[4])
+        num_cured.append(i[3])
 
     #print(country_states)
     #print("hehe", country_states)
@@ -86,7 +88,7 @@ def main():
                            max=max, state_with_max_cases=state_with_max_cases,
                            max_casualties=max_casualties,
                            state_with_max_casualties=state_with_max_casualties,
-                           stats_as_on_date=stats_as_on_date)
+                           stats_as_on_date=stats_as_on_date, num_cured=num_cured)
 
 
 if __name__ == "__main__":

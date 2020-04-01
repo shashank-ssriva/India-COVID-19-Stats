@@ -145,7 +145,7 @@
 									{{ item }},
 									{% endfor %}],
 									spanGaps: false,
-									backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(153, 102, 255, 0.2)']
+									backgroundColor: ['rgba(246, 142, 73)']
 								}]
 							}
 							// get chart canvas
@@ -236,9 +236,64 @@
 			<br>
 			<br>
 				<!-- /panel -->
+				<hr>
+				<br>
+				<br>
+				<br>
+				<!-- panel -->
+				<div class="uk-width-1-1">
+					<div class="uk-card uk-card-default uk-card-large">
+
+						<div class="uk-card-body">
+				<div class="chart-container">
+					<canvas id="state-wise-cured-chart"></canvas>
+					<script>
+					var chartData = {
+						labels: [{% for item in country_states %}
+							"{{item}}",
+							{% endfor %}],
+							datasets: [{
+								label: '# of people cured',
+								data: [{% for item in num_cured %}
+									{{ item }},
+									{% endfor %}],
+									backgroundColor: ['rgb(47, 204, 132)'],
+								}]
+							}
+							// get chart canvas
+							var ctx = document.getElementById("state-wise-cured-chart").getContext("2d");
+							// create the chart using the chart canvas
+							var myChart = new Chart(ctx, {
+								type: 'line',
+								data: chartData,
+								options: {
+									scales:
+									{
+										yAxes:
+										[{
+											ticks:
+											{
+												beginAtZero: true
+											}
+										}]
+									},
+									title: {
+										display: true,
+										text: 'State wise cured/discharged cases'
+									}
+								}
+							});
+							</script>
+						</div>
+					</div>
+				</div>
 			</div>
-<br>
-<br>
+			<hr>
+			<br>
+			<br>
+			<br>
+				<!-- /panel -->
+			</div>
 <br>
 <footer class="uk-section uk-section-small uk-text-center">
 	<hr>
