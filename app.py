@@ -14,11 +14,11 @@ def main():
     soup = BeautifulSoup(response, 'html.parser')
     table = soup.find('div', {'class': 'data-table table-responsive'})
     date_div_element = soup.findAll('div', attrs={"class": "status-update"})
-    print(date_div_element)
+    #print(date_div_element)
 
     for x in date_div_element:
         stats_as_on_date = x.find('h2').text.strip("COVID-19 INDIA")
-    print(stats_as_on_date)
+    #print(stats_as_on_date)
         
     state_wise_stats = []
     all_rows = table.select('tbody tr')
@@ -29,23 +29,27 @@ def main():
         state_wise_stats.append(stat)
 
     print(state_wise_stats)
-    print(state_wise_stats[-1])
+    print("-----")
+    print(state_wise_stats[-2])
     num_cases = []
     country_states = []
     num_casualties = []
     num_cured = []
-    num_people_cured = state_wise_stats[-1][2]
-    total_casualties = state_wise_stats[-1][3]
-    total_cases_temp = state_wise_stats[-1][1]
-    total_cases = total_cases_temp.replace("#", "")
+    num_people_cured = state_wise_stats[-2][2]
+    #print(state_wise_stats[-1])
+    total_casualties = state_wise_stats[-2][3]
+    total_cases_temp = state_wise_stats[-2][1]
+    print(total_cases_temp)
+    total_cases = total_cases_temp.replace("*", "")
 
     #state_wise_stats.remove(state_wise_stats[0])
-    print("new list", state_wise_stats)
+    #print("new list", state_wise_stats)
 
     num_elements_to_remove = 1
     new_state_wise_stats_list = state_wise_stats[: -num_elements_to_remove or None]
+    del new_state_wise_stats_list[-1]
     for i in new_state_wise_stats_list:
-        print(i)
+        #print("hehe", i)
         num_cases.append(i[2])
         country_states.append(i[1])
         num_casualties.append(i[4])
