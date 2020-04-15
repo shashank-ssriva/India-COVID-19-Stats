@@ -30,33 +30,36 @@ def main():
 
     print(state_wise_stats)
     print("-----")
-    print(state_wise_stats[-2])
+    print(state_wise_stats[0])
     num_cases = []
     country_states = []
     num_casualties = []
     num_cured = []
-    num_people_cured = state_wise_stats[-2][2]
+    num_people_cured = state_wise_stats[-3][2]
     #print(state_wise_stats[-1])
-    total_casualties = state_wise_stats[-2][3]
-    total_cases_temp = state_wise_stats[-2][1]
+    total_casualties = state_wise_stats[-3][3]
+    total_cases_temp = state_wise_stats[-3][1]
     print(total_cases_temp)
     total_cases = total_cases_temp.replace("*", "")
 
     #state_wise_stats.remove(state_wise_stats[0])
     #print("new list", state_wise_stats)
 
-    num_elements_to_remove = 1
-    new_state_wise_stats_list = state_wise_stats[: -num_elements_to_remove or None]
-    del new_state_wise_stats_list[-1]
-    for i in new_state_wise_stats_list:
-        #print("hehe", i)
+    #num_elements_to_remove = 1
+    #new_state_wise_stats_list = state_wise_stats[: -num_elements_to_remove or None]
+    #del new_state_wise_stats_list[-3]
+    state_wise_stats = state_wise_stats[: len(state_wise_stats) -3]
+    #print("hehe")
+    #for i in new_state_wise_stats_list:
+    for i in state_wise_stats:
+        print("hehe", i)
         num_cases.append(i[2])
         country_states.append(i[1])
         num_casualties.append(i[4])
         num_cured.append(i[3])
 
     #print(country_states)
-    #print("hehe", country_states)
+    #print("hehe", country_s
     #state_wise_stats.remove(state_wise_stats[-1])
     #country_states.remove(country_states[-1])
     #num_cases.remove(num_cases[-1])
