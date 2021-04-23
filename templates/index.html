@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="Description" content="This web-app pulls the latest data from the Ministry of Health & Family Welfare website & displays in the form of easy to understand, colorful
 	& interactive charts. It is based on Python & Flask and the entire code is open source.">
-	<meta name="keywords" content="coronavirus, covid-19, state-wise tally, coronavirus india cases, coronavirus india stats, coronavirus india state-wise stats">
+	<meta name="keywords"
+		content="coronavirus, covid-19, state-wise tally, coronavirus india cases, coronavirus india stats, coronavirus india state-wise stats">
 	<title>Coronavirus India Stats - State-wise Tally</title>
 
 	<!-- UIkit CSS FILES -->
@@ -13,21 +15,22 @@
 	<link rel="stylesheet" type="text/css" href="static/css/dashboard.css">
 
 	<!-- Font Awesome FILES -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+		integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 	<script src="https://kit.fontawesome.com/b2666f54db.js"></script>
 
 	<!-- Chart.js FILE -->
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-	
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-162138994-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'UA-162138994-1');
-</script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-162138994-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'UA-162138994-1');
+	</script>
 
 </head>
 
@@ -38,273 +41,308 @@
 			<nav class="uk-navbar uk-light" data-uk-navbar="mode:click; duration: 250">
 				<div class="uk-navbar-left">
 					<div class="uk-navbar-item uk-hidden@m">
-						
-						</div>
-						<ul class="uk-navbar-nav uk-visible@m">
-							<li><a href="#">COVID-19 India Status</a></li>
-						</ul>
 					</div>
-					</nav>
-				</div>
-			</header>
-			<!--/HEADER-->
-
-			<!-- LEFT BAR -->
-			<aside id="left-col" class="uk-light uk-visible@m">
-				<div class="left-logo uk-flex uk-flex-middle">
-					<span class="uk-text-large">Dashboard</span>
-				</div>
-				<div class="left-content-box content-box-dark">
-					<img src="static/img/shashank-srivastava.jpeg" alt="" class="uk-border-circle profile-img">
-					<h4 class="uk-text-center uk-margin-remove-vertical text-light">Shashank Srivastava</h4>
-					<div class="uk-position-relative uk-text-center uk-display-block">
-						<a href="https://shashanksrivastava.gitlab.io" class="uk-text-small uk-text-muted uk-display-block uk-text-center">DevOps Engineer</a>
-					</div>
-				</div>
-
-				<div class="left-nav-wrap">
-					<ul class="uk-nav uk-nav-default uk-nav-parent-icon" data-uk-nav>
+					<ul class="uk-navbar-nav uk-visible@m">
+						<li><a href="#">COVID-19 India Status</a></li>
 					</ul>
-					<div class="left-content-box uk-margin-top">
-					</div>
 				</div>
-			</aside>
-			<!-- /LEFT BAR -->
+			</nav>
+		</div>
+	</header>
+	<!--/HEADER-->
 
-			<!-- CONTENT -->
-			<div id="content" data-uk-height-viewport="expand: true">
-				<div class="uk-container uk-container-expand">
-				<h3 class="uk-dropcap">Below is the latest novel coronavirus data for India.
-					<br>
-					<br>
+	<!-- LEFT BAR -->
+	<aside id="left-col" class="uk-light uk-visible@m">
+		<div class="left-logo uk-flex uk-flex-middle">
+			<span class="uk-text-large">Dashboard</span>
+		</div>
+		<div class="left-content-box content-box-dark">
+			<img src="static/img/shashank-srivastava.jpeg" alt="" class="uk-border-circle profile-img">
+			<h4 class="uk-text-center uk-margin-remove-vertical text-light">Shashank Srivastava</h4>
+			<div class="uk-position-relative uk-text-center uk-display-block">
+				<a href="https://shashanksrivastava.medium.com/ target=_blank"
+					class="uk-text-small uk-text-muted uk-display-block uk-text-center">DevOps Engineer</a>
+			</div>
+		</div>
+
+		<div class="left-nav-wrap">
+			<ul class="uk-nav uk-nav-default uk-nav-parent-icon" data-uk-nav>
+			</ul>
+			<div class="left-content-box uk-margin-top">
+			</div>
+		</div>
+	</aside>
+	<!-- /LEFT BAR -->
+
+	<!-- CONTENT -->
+	<div id="content" data-uk-height-viewport="expand: true">
+		<div class="uk-container uk-container-expand">
+			<h3 class="uk-dropcap">Below is the latest novel coronavirus data for India.
+				<br>
+				<br>
 				<blockquote cite="#">
-				<p class="k-margin-small-bottom"> - This is based on data provided by the Ministry of Health & Family Welfare as on <b>{{ stats_as_on_date }}</b>.</p>
+					<p class="k-margin-small-bottom"> - This is based on data provided by the Ministry of Health &
+						Family Welfare as on <b>{{ stats_as_on_date }}</b>.</p>
 				</blockquote>
 				<hr>
 				<div style="width: 100%;">
 					<div style="float:left; width: 35%;">
-				<h4>Total number of confirmed cases in India : <span class="uk-label uk-label-default"><b>{{ total_cases }}</b></span>.
-				<h4>Total number of casualties : <span class="uk-label uk-label-danger"><b>{{ total_casualties }}</b></span>.
-				<h4>Number of people who have been cured/discharged : <span class="uk-label uk-label-success"><b>{{ num_people_cured }}</b></span>.
-				<h4><b>{{ state_with_max_cases }}</b> has the maximum number of confirmed COVID-19 cases, i.e. <span class="uk-label uk-label-warning"><b>{{ max }}</b></span>.
-				<h4><b>{{ state_with_max_casualties }}</b> has the maximum number of deaths, i.e. <span class="uk-label uk-label-danger"><b>{{ max_casualties }}</b></span> due to COVID-19.
-				<hr>
-			   </div>
-			   <div style="float:right;">
-				<!-- panel -->
-				<div class="uk-width-1-1">
-				<div class="uk-card-body">
-				<div class="chart-container">
-					<canvas id="pie-chart" width="1200" height="700" style="display: block; height: 300px; width: 600px;"></canvas>
-					<script>
-					var chartData = {
-						labels: ['Confirmed cases', 'Deaths', 'Cured/Discharged'],
-							datasets: [{
-								label: 'Pie chart',
-								data: [{{ total_cases }}, {{ total_casualties }}, {{ num_people_cured }}],
-									spanGaps: false,
-									backgroundColor: ['orange', 'red', '#90EE90' ],
+						<h4>Total number of confirmed cases in India : <span class="uk-label uk-label-default"><b>{{
+									total_cases }}</b></span>.
+							<h4>Total number of casualties : <span class="uk-label uk-label-danger"><b>{{
+										total_casualties }}</b></span>.
+								<h4>Number of people who have been cured/discharged : <span
+										class="uk-label uk-label-success"><b>{{ num_people_cured }}</b></span>.
+									<h4><b>{{ state_with_max_cases }}</b> has the maximum number of confirmed COVID-19
+										cases, i.e. <span class="uk-label uk-label-warning"><b>{{ max }}</b></span>.
+										<h4><b>{{ state_with_max_casualties }}</b> has the maximum number of deaths,
+											i.e. <span class="uk-label uk-label-danger"><b>{{ max_casualties
+													}}</b></span> due to COVID-19.
+											<hr>
+					</div>
+					<div style="float:right;">
+						<!-- panel -->
+						<div class="uk-width-1-1">
+							<div class="uk-card-body">
+								<div class="chart-container">
+									<canvas id="pie-chart" width="1200" height="700"
+										style="display: block; height: 300px; width: 600px;"></canvas>
+									<script>
+										var chartData = {
+											labels: ['Confirmed cases', 'Deaths', 'Cured/Discharged'],
+											datasets: [{
+												label: 'Pie chart',
+												data: [{{ total_cases }}, {{ total_casualties }}, {{ num_people_cured }}],
+										spanGaps: false,
+											backgroundColor: ['orange', 'red', '#90EE90'],
 								}]
 							}
-							// get chart canvas
-							var ctx = document.getElementById("pie-chart").getContext("2d");
-							// create the chart using the chart canvas
-							var myChart = new Chart(ctx, {
-								type: 'pie',
-								data: chartData,
-								options: {
-									title: {
-										display: true,
-										text: 'Data at a glance',
-									}
-								}
-							});
-							</script>
+										// get chart canvas
+										var ctx = document.getElementById("pie-chart").getContext("2d");
+										// create the chart using the chart canvas
+										var myChart = new Chart(ctx, {
+											type: 'pie',
+											data: chartData,
+											options: {
+												title: {
+													display: true,
+													text: 'Data at a glance',
+												}
+											}
+										});
+									</script>
+								</div>
+							</div>
 						</div>
 					</div>
-				
-			</div>
-				<!-- /panel -->
-			  </div>
-			<div style="clear:both"></div>
-				<!-- panel -->
-				<div class="uk-grid uk-grid-medium" data-uk-grid>
-				<div class="uk-width-1-1">
-				<div class="uk-card uk-card-default uk-card-large">
-				<div class="uk-card-body">
-				<div class="chart-container">
-					<canvas id=state-wise-cases-chart></canvas>
-					<script>
-					var chartData = {
-						labels: [{% for item in country_states %}
-							"{{item}}",
-							{% endfor %}],
-							datasets: [{
-								label: '# of cases',
-								data: [{% for item in num_cases %}
+
+					<!-- /panel -->
+					<div style="clear:both">
+						<!-- panel -->
+						<div class="uk-grid uk-grid-medium" data-uk-grid>
+							<div class="uk-width-1-1">
+								<div class="uk-card uk-card-default uk-card-large">
+									<div class="uk-card-body">
+										<div class="chart-container">
+											<canvas id=state-wise-cases-chart></canvas>
+											<script>
+												var chartData = {
+													labels: [{% for item in country_states %}
+												"{{item}}",
+													{% endfor %}],
+												datasets: [{
+													label: '# of cases',
+													data: [{% for item in num_cases %}
 									{{ item }},
-									{% endfor %}],
-									spanGaps: false,
-									backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(153, 102, 255, 0.2)']
+												{% endfor %}],
+													spanGaps: false,
+														backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(153, 102, 255, 0.2)']
 								}]
 							}
-							// get chart canvas
-							var ctx = document.getElementById("state-wise-cases-chart").getContext("2d");
-							// create the chart using the chart canvas
-							var myChart = new Chart(ctx, {
-								type: 'line',
-								data: chartData,
-								options: {
-									scales:
-									{
-										yAxes:
-										[{
-											ticks:
-											{
-												beginAtZero: true
-											}
-										}]
-									},
-									title: {
-										display: true,
-										text: 'Coronavirus cases'
-									}
-								}
-							});
-							</script>
+												// get chart canvas
+												var ctx = document.getElementById("state-wise-cases-chart").getContext("2d");
+												// create the chart using the chart canvas
+												var myChart = new Chart(ctx, {
+													type: 'line',
+													data: chartData,
+													options: {
+														scales:
+														{
+															yAxes:
+																[{
+																	ticks:
+																	{
+																		beginAtZero: true
+																	}
+																}]
+														},
+														title: {
+															display: true,
+															text: 'State wise Coronavirus cases'
+														}
+													}
+												});
+											</script>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+
+					<!-- /panel -->
+
+					<!-- panel -->
+					<div class="uk-grid uk-grid-medium" data-uk-grid>
+						<div class="uk-width-1-1">
+							<div class="uk-card uk-card-default uk-card-large">
+								<div class="uk-card-body">
+									<div class="chart-container">
+										<canvas id="state-wise-deaths-chart"></canvas>
+										<script>
+											var chartData = {
+												labels: [{% for item in country_states %}
+											"{{item}}",
+												{% endfor %}],
+											datasets: [{
+												label: '# of deaths',
+												data: [{% for item in num_casualties %}
+									{{ item }},
+											{% endfor %}],
+												spanGaps: false,
+													backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff', '#36a2eb', '#4bc0c0'],
+								}]
+							}
+											// get chart canvas
+											var ctx = document.getElementById("state-wise-deaths-chart").getContext("2d");
+											// create the chart using the chart canvas
+											var myChart = new Chart(ctx, {
+												type: 'line',
+												data: chartData,
+												options: {
+													scales:
+													{
+														yAxes:
+															[{
+																ticks:
+																{
+																	beginAtZero: true
+																}
+															}]
+													},
+													title: {
+														display: true,
+														text: 'State wise casualties'
+													}
+												}
+											});
+										</script>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<hr>
-			<br>
-			<br>
-			<br>
+
+				<br>
+				<br>
+				<br>
 				<!-- /panel -->
 
+				<br>
+				<br>
+				<br>
+				<br>
+					<br>
+					<br>
+					<br>
 				<!-- panel -->
-				<div class="uk-width-1-1">
-				<div class="uk-card uk-card-default uk-card-large">
-				<div class="uk-card-body">
-				<div class="chart-container">
-					<canvas id="state-wise-deaths-chart"></canvas>
-					<script>
-					var chartData = {
-						labels: [{% for item in country_states %}
-							"{{item}}",
-							{% endfor %}],
-							datasets: [{
-								label: '# of deaths',
-								data: [{% for item in num_casualties %}
+				<div class="uk-grid uk-grid-medium" data-uk-grid>
+					<div class="uk-width-1-1">
+						<div class="uk-card uk-card-default uk-card-large">
+							<div class="uk-card-body">
+								<div class="chart-container">
+									<canvas id="state-wise-cured-chart"></canvas>
+									<script>
+										var chartData = {
+											labels: [{% for item in country_states %}
+										"{{item}}",
+											{% endfor %}],
+										datasets: [{
+											label: '# of people cured',
+											data: [{% for item in num_cured %}
 									{{ item }},
-									{% endfor %}],
-									spanGaps: false,
-									backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff', '#36a2eb' , '#4bc0c0' ],
+										{% endfor %}],
+											backgroundColor: ['rgba(47, 204, 132, 0.2)'],
 								}]
 							}
-							// get chart canvas
-							var ctx = document.getElementById("state-wise-deaths-chart").getContext("2d");
-							// create the chart using the chart canvas
-							var myChart = new Chart(ctx, {
-								type: 'line',
-								data: chartData,
-								options: {
-									scales:
-									{
-										yAxes:
-										[{
-											ticks:
-											{
-												beginAtZero: true
+										// get chart canvas
+										var ctx = document.getElementById("state-wise-cured-chart").getContext("2d");
+										// create the chart using the chart canvas
+										var myChart = new Chart(ctx, {
+											type: 'line',
+											data: chartData,
+											options: {
+												scales:
+												{
+													yAxes:
+														[{
+															ticks:
+															{
+																beginAtZero: true
+															}
+														}]
+												},
+												title: {
+													display: true,
+													text: 'State wise cured/discharged cases'
+												}
 											}
-										}]
-									},
-									title: {
-										display: true,
-										text: 'State wise casualties'
-									}
-								}
-							});
-							</script>
+										});
+									</script>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<hr>
-			<br>
-			<br>
-			<br>
-				<!-- /panel -->
-				<hr>
-				<br>
-				<br>
-				<br>
-				<!-- panel -->
-				<div class="uk-width-1-1">
-				<div class="uk-card uk-card-default uk-card-large">
-				<div class="uk-card-body">
-				<div class="chart-container">
-					<canvas id="state-wise-cured-chart"></canvas>
-					<script>
-					var chartData = {
-						labels: [{% for item in country_states %}
-							"{{item}}",
-							{% endfor %}],
-							datasets: [{
-								label: '# of people cured',
-								data: [{% for item in num_cured %}
-									{{ item }},
-									{% endfor %}],
-									backgroundColor: ['rgba(47, 204, 132, 0.2)'],
-								}]
-							}
-							// get chart canvas
-							var ctx = document.getElementById("state-wise-cured-chart").getContext("2d");
-							// create the chart using the chart canvas
-							var myChart = new Chart(ctx, {
-								type: 'line',
-								data: chartData,
-								options: {
-									scales:
-									{
-										yAxes:
-										[{
-											ticks:
-											{
-												beginAtZero: true
-											}
-										}]
-									},
-									title: {
-										display: true,
-										text: 'State wise cured/discharged cases'
-									}
-								}
-							});
-							</script>
-						</div>
-					</div>
-				</div>
-			</div>
-			<hr>
-			<br>
-			<br>
-			<br>
-				<!-- /panel -->
-			</div>
-<br>
-<footer class="uk-section uk-section-small uk-text-center">
-	<hr>
-	<p class="uk-text-small uk-text-center"> Stay Healthy, Stay Safe! - Created by <a
-			href="https://shashanksrivastava.gitlab.io"> Shashank Srivastava</a> | Built with <a
-			href="https://getuikit.com" title="Visit UIkit 3 site" target="_blank" data-uk-tooltip><span
-				data-uk-icon="uikit"></span></a> </p>
-</footer>
-</div>
-</div>
-			<!-- /CONTENT -->
-						<!-- JS FILES -->
-						<script src="static/js/uikit.min.js"></script>
-						<script src="static/js/uikit-icons.min.js"></script>
+		</div>
+
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<!-- /panel -->
+	</div>
+	<br>
+	<br>
+	<br>
+	<footer class="uk-section uk-section-small uk-text-center">
+		<hr>
+		<p class="uk-text-small uk-text-center"> Stay Healthy, Stay Safe! - Created by <a
+				href="https://shashanksrivastava.medium.com/"> Shashank Srivastava</a> | Built with <a
+				href="https://getuikit.com" title="Visit UIkit 3 site" target="_blank" data-uk-tooltip><span
+					data-uk-icon="uikit"></span></a>
+		</p>
+	</footer>
+	</div>
+	</div>
+	<!-- /CONTENT -->
+	<!-- JS FILES -->
+	<script src="https://cdn.jsdelivr.net/npm/uikit@3.6.20/dist/js/uikit.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/uikit@3.6.20/dist/js/uikit-icons.min.js"></script>
 </body>
+
 </html>
