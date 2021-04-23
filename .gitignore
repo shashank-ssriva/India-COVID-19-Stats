@@ -6,3 +6,4 @@ __pycache__
 htmlcov/
 tests/
 .coverage
+.DS_Store

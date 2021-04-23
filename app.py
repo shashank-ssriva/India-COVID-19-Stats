@@ -1,101 +1,95 @@
 # Import the necessary modules
 import os
 from flask import Flask, render_template, json, request
-from bs4 import BeautifulSoup
 import requests
+import urllib.request
 app = Flask(__name__)
-
 
 @app.route('/', methods=['POST', 'GET'])
 def main():
-    def extract_contents(row): return [x.text.replace('\n', '') for x in row]
-    URL = 'https://www.mohfw.gov.in/'
-    response = requests.get(URL).content
-    soup = BeautifulSoup(response, 'html.parser')
-    table = soup.find('div', {'class': 'data-table table-responsive'})
-    date_div_element = soup.findAll('div', attrs={"class": "status-update"})
-    #print(date_div_element)
+    with urllib.request.urlopen("https://api.apify.com/v2/key-value-stores/toDWvRj1JpTXiM8FF/records/LATEST?disableRedirect=true") as url:
+        data = json.loads(url.read().decode())
+        total_cases = data['totalCases']
+        num_people_cured = data['recovered']
+        total_casualties = data['deaths']
+        stats_as_on_date = data['lastUpdatedAtApify'] 
+        regionData = data['regionData'] 
+    print("Total number of confirmed cases in India\n ", total_cases)
+    print("Total number of deaths in India\n ", total_casualties)
+    print("Total number of people who have been recovered in India\n ", num_people_cured)
+    split_string = stats_as_on_date .split("T", 1)
 
-    for x in date_div_element:
-        stats_as_on_date = x.find('h2').text.strip("COVID-19 INDIA")
+    stats_as_on_date = split_string[0]
     #print(stats_as_on_date)
-        
     state_wise_stats = []
-    all_rows = table.select('tbody tr')
-    #print(all_rows)
-    for row in all_rows:
-        stat = extract_contents(row.find_all('td'))
-        #print("STAT", stat)
-        state_wise_stats.append(stat)
-
-    print(state_wise_stats)
-    print("-----")
-    print(state_wise_stats[0])
+    state_wise_cases = [['stateName' , 'totalInfected' , 'recovered' , 'deceased']]
+    state_wise_totalInfected = []
+    state_wise_deceased = []
+    covidData = []
     num_cases = []
     country_states = []
     num_casualties = []
     num_cured = []
-    num_people_cured = state_wise_stats[-3][2]
-    #print(state_wise_stats[-1])
-    total_casualties = state_wise_stats[-3][3]
-    total_cases_temp = state_wise_stats[-3][1]
-    print(total_cases_temp)
-    total_cases = total_cases_temp.replace("*", "")
+    #covidData.append(state_wise_cases)
+    objectCount = 0
+    state_wise_stats.append(regionData)
+    #print(state_wise_stats)
+    #state_wise_activeCases = []
+    #state_wise_activeCases = state_wise_stats[0][1]
+    #print(state_wise_activeCases)
 
-    #state_wise_stats.remove(state_wise_stats[0])
-    #print("new list", state_wise_stats)
+    #region = data['regionData'][0]['region']  
+    #print(region)
 
-    #num_elements_to_remove = 1
-    #new_state_wise_stats_list = state_wise_stats[: -num_elements_to_remove or None]
-    #del new_state_wise_stats_list[-3]
-    state_wise_stats = state_wise_stats[: len(state_wise_stats) -3]
-    #print("hehe")
-    #for i in new_state_wise_stats_list:
-    for i in state_wise_stats:
-        print("hehe", i)
-        num_cases.append(i[2])
-        country_states.append(i[1])
-        num_casualties.append(i[4])
-        num_cured.append(i[3])
+    #int id = jsonObj.getInt("id");
+    for i in data['regionData']:
+        stateName = data['regionData'][objectCount]['region']  
+        totalInfected = data['regionData'][objectCount]['totalInfected']  
+        recovered = data['regionData'][objectCount]['recovered']
+        deceased = data['regionData'][objectCount]['deceased']    
+        #state_wise_cases.append(stateName)
+        #state_wise_cases.append(totalInfected)
+        #state_wise_cases.append(recovered)
+        state_wise_cases.append([stateName, totalInfected, recovered, deceased])
+        state_wise_totalInfected.append([stateName, totalInfected])
+        state_wise_deceased.append([stateName, deceased])
+        num_cured.append(recovered)
+        num_cases.append(totalInfected)
+        country_states.append(stateName)
+        num_casualties.append(deceased)
+        objectCount +=1
+    covidData.append(state_wise_cases)    
+    #print(state_wise_totalInfected)
+    #print(state_wise_deceased)
+    for record in covidData:
+        for x in record:
+                print(x),
+        print
 
-    #print(country_states)
-    #print("hehe", country_s
-    #state_wise_stats.remove(state_wise_stats[-1])
-    #country_states.remove(country_states[-1])
-    #num_cases.remove(num_cases[-1])
-    #num_casualties.remove(num_casualties[-1])
+    for element in state_wise_totalInfected:
+        element[1] = int(element[1])
+    result1 = max(state_wise_totalInfected, key=lambda x: x[1])
+    print("State with maximum cases:\n ", result1)
+    state_with_max_cases = result1[0]
+    max_cases = result1[1]
 
+    for element in state_wise_deceased:
+        element[1]=int(element[1])
+    result2 = max(state_wise_deceased, key = lambda x: x[1])
+    print("State with maximum number of deaths:\n ", result2)
+    state_with_max_casualties = result2[0]
+    max_casualties = result2[1]
+    #print(state_with_max_cases)
 
-    max = 0
-    max_value_index = 0
-    for j in num_cases:
-        k = j
-        k = int(k)
-        if k > max:
-            max = k
-            max_value_index = num_cases.index(j)
-    state_with_max_cases = country_states[max_value_index]
-
-    max_casualties = 0
-
-    for j in num_casualties:
-        k = j
-        k = int(k)
-        if k >= max_casualties:
-            max_casualties = k
-            max_casualties_value_index = num_casualties.index(j)
-
-    state_with_max_casualties = country_states[max_casualties_value_index]
-
-    return render_template('index.html', country_states=country_states,
-                           num_cases=num_cases, num_casualties=num_casualties,
-                           num_people_cured=num_people_cured,
-                           total_casualties=total_casualties,
-                           total_cases=total_cases,
-                           max=max, state_with_max_cases=state_with_max_cases,
-                           max_casualties=max_casualties,
-                           state_with_max_casualties=state_with_max_casualties,
-                           stats_as_on_date=stats_as_on_date, num_cured=num_cured)
+    return render_template('index.html', country_states = country_states,
+        num_cases= num_cases, num_casualties = num_casualties,
+        num_people_cured = num_people_cured,
+        total_casualties = total_casualties,
+        total_cases = total_cases,
+        max = max_cases, state_with_max_cases = state_with_max_cases,
+        max_casualties = max_casualties,
+        state_with_max_casualties = state_with_max_casualties,
+        num_cured = num_cured, stats_as_on_date = stats_as_on_date)
 
 
 if __name__ == "__main__":
