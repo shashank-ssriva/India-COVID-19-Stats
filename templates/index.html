@@ -9,7 +9,7 @@
 	<title>Coronavirus India Stats - State-wise Tally</title>
 
 	<!-- UIkit CSS FILES -->
-	<link rel="stylesheet" type="text/css" href="static/css/uikit.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.20/dist/css/uikit.min.css" />
 	<link rel="stylesheet" type="text/css" href="static/css/dashboard.css">
 
 	<!-- Font Awesome FILES -->
@@ -78,7 +78,7 @@
 					<br>
 					<br>
 				<blockquote cite="#">
-				<p class="k-margin-small-bottom"> - This is based on data provided by the Ministry of Health & Family Welfare <b>{{ stats_as_on_date }}</b>.</p>
+				<p class="k-margin-small-bottom"> - This is based on data provided by the Ministry of Health & Family Welfare as on <b>{{ stats_as_on_date }}</b>.</p>
 				</blockquote>
 				<hr>
 				<div style="width: 100%;">
@@ -95,7 +95,7 @@
 				<div class="uk-width-1-1">
 				<div class="uk-card-body">
 				<div class="chart-container">
-					<canvas id="pie-chart" width="1200" height="600" style="display: block; height: 300px; width: 600px;"></canvas>
+					<canvas id="pie-chart" width="1200" height="700" style="display: block; height: 300px; width: 600px;"></canvas>
 					<script>
 					var chartData = {
 						labels: ['Confirmed cases', 'Deaths', 'Cured/Discharged'],
@@ -184,9 +184,8 @@
 
 				<!-- panel -->
 				<div class="uk-width-1-1">
-					<div class="uk-card uk-card-default uk-card-large">
-
-						<div class="uk-card-body">
+				<div class="uk-card uk-card-default uk-card-large">
+				<div class="uk-card-body">
 				<div class="chart-container">
 					<canvas id="state-wise-deaths-chart"></canvas>
 					<script>
@@ -242,9 +241,8 @@
 				<br>
 				<!-- panel -->
 				<div class="uk-width-1-1">
-					<div class="uk-card uk-card-default uk-card-large">
-
-						<div class="uk-card-body">
+				<div class="uk-card uk-card-default uk-card-large">
+				<div class="uk-card-body">
 				<div class="chart-container">
 					<canvas id="state-wise-cured-chart"></canvas>
 					<script>
